@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-bv$^bkqr%zcv_zhkan%px^8daf9y)o2^lcdj&$49ja4w8wp@3g'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'valor_predeterminado')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -77,8 +80,15 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',  # Cambiar a PostgreSQL
+        'NAME': 'villacom',  # El nombre de tu base de datos
+        'USER': 'postgres',  # Tu usuario de PostgreSQL
+        'PASSWORD': 'Colombia10.',  # Tu contraseña de PostgreSQL
+        'HOST': 'localhost',  # El host de tu base de datos (puede ser una URL si usas una base de datos en la nube)
+        'PORT': '5432',  # El puerto de PostgreSQL (por defecto es 5432)
+        'OPTIONS': {
+            'client_encoding': 'UTF8',
+        },
     }
 }
 
