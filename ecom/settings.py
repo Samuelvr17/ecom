@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'valor_predeterminado')
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -77,18 +77,19 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+import environ
+
+env = environ.Env()
+environ.Env.read_env()  
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',  # Cambiar a PostgreSQL
-        'NAME': 'villacom',  # El nombre de tu base de datos
-        'USER': 'postgres',  # Tu usuario de PostgreSQL
-        'PASSWORD': 'Colombia10.',  # Tu contraseña de PostgreSQL
-        'HOST': 'localhost',  # El host de tu base de datos (puede ser una URL si usas una base de datos en la nube)
-        'PORT': '5432',  # El puerto de PostgreSQL (por defecto es 5432)
-        'OPTIONS': {
-            'client_encoding': 'UTF8',
-        },
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
     }
 }
 
