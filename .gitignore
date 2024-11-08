@@ -1,0 +1,19 @@
+# Ignorar el archivo de base de datos SQLite
+db.sqlite3
+
+# Ignorar la carpeta de migraciones de Django
+**/migrations/
+
+# Ignorar archivos de configuración locales
+.env
+
+# Ignorar archivos de caché de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar archivos de compilación y de entornos virtuales
+build/
+venv/
+.DS_Store
